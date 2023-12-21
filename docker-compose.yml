@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  widgetorderapp:
+    image: ${DOCKER_REGISTRY-}widgetorderapp
+    build:
+      context: .
+      dockerfile: src/WidgetOrderApp/Dockerfile
+
+  widgetorderservice:
+    image: ${DOCKER_REGISTRY-}widgetorderservice
+    build:
+      context: .
+      dockerfile: src/WidgetOrderService/Dockerfile
+
