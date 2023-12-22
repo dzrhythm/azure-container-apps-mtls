@@ -18,7 +18,7 @@ $imageTag='1.0.0'
 docker network create widget-net
 
 # Login to Azure
-az login --tenant appliedis.com
+az login
 
 # Add/Update the containerapp extension to Azure CLI
 az extension add --name containerapp --upgrade
@@ -32,8 +32,8 @@ az group create --name $resourceGroup --location $location
 az acr create --resource-group $resourceGroup --name $acrName --sku Basic --admin-enabled true
 
 # You may need to manually assign an ACR role to your account:
-# 1. Go to the Azure Container Registry.
-# 2. Select Access Control(IAM).
+# 1. Go to the Azure Container Registry in the Azure Portal.
+# 2. Select Access Control (IAM).
 # 3. Click on "Add role assignment" under "Grant access to this resouce"
 # 4. Now go to "Priviledged administrator roles" and select "Owner"
 # 5. Click on "Next" at the bottom of the page.
@@ -46,7 +46,7 @@ az acr create --resource-group $resourceGroup --name $acrName --sku Basic --admi
 az acr login --name $acrName
 
 
-# Create the container apps environment
+# Create the container apps environment with mTLS enabled
 az containerapp env create `
   --name $appEnvironment `
   --resource-group $resourceGroup `
@@ -107,6 +107,8 @@ az containerapp registry set --name $imageNameApp --resource-group $resourceGrou
 # Deploy our container image
 az containerapp update --name $imageNameApp --resource-group $resourceGroup --image "$acrName.azurecr.io/${imageNameApp}:$imageTag"
 
+# Go to the Azure Portal to view your azure container apps. In the Overview blade you will find the URL to
+# connect to your applications.
 
 # Cleanup when ready
 #az group delete --name $resourceGroup --yes

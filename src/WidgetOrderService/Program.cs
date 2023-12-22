@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.Rewrite;
 using WidgetOrderService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,11 @@ app.UseHttpLogging();
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// redirect / to /swagger
+RewriteOptions rewriteOptions = new();
+rewriteOptions.AddRedirect("^$", "swagger");
+app.UseRewriter(rewriteOptions);
 
 //app.UseHttpsRedirection();
 
