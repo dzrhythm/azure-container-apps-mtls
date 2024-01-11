@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Widget Orders</h1>
+    <p>
+        <a asp-page="OrderWidgets">Order More Widgets</a>
+    </p>
+    <table class="table table-responsive w-75 mx-auto">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Widget Count</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Orders != null)
+            {
+                foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Id </td>
+                        <td>@order.Count</td>
+                        <td>@order.Created</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

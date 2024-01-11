@@ -1,0 +1,15 @@
+﻿@page
+@model WidgetOrderApp.Pages.OrderWidgetsModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Order Widgets";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <label for="widget-count">How many?</label>
+    <input id="widget-count" asp-for="OrderRequest.Count" />
+    <input type="submit" />
+</form>
