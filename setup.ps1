@@ -4,9 +4,11 @@
 # by placing the cursor on it and pressing the F8 key,
 # or run multiple lines by selecting them and pressing the F8 key.
 
-# Update and set these variable values before continuing
+# Update and set this before continuing. Must be unique amongst all Azure container registries
+$acrName=''
+
+# Update (if desired) and set these variable values before continuing
 $resourceGroup='container-apps'
-$acrName='aisdzcontainerappscr' # Must be unique amongst all Azure container registries
 $location='EastUS'
 $appEnvironment='widget-app-env-mtls'
 $imageNameApp='widgetorderapp-mtls'
@@ -15,6 +17,7 @@ $containerPort='5004'
 $imageTag='1.0.0'
 
 # One-time: create a local user-defined network to use for local debugging in containers
+# using Visual Studio code.
 docker network create widget-net
 
 # Login to Azure
@@ -51,7 +54,7 @@ az containerapp env create `
   --name $appEnvironment `
   --resource-group $resourceGroup `
   --location $location `
-  --enable-mtls
+  --enable-mtls # enable mTLS for intra-environment communication
 
 ##############################################################################
 #
